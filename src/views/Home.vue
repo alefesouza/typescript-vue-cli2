@@ -16,7 +16,6 @@ export default class Home extends Vue {
   value: string;
 
   readonly URL = 'https://api.meetup.com/VueJS-SP/events/?status=past';
-  meetupEvents: MeetupEvent[] = [];
 
   async mounted() {
     console.log('mounted');
@@ -26,7 +25,11 @@ export default class Home extends Vue {
 
     const response = await axios.get<MeetupEvent[]>(this.URL);
 
-    this.meetupEvents = response.data;
+    this.$store.dispatch('setEvents', response.data);
+  }
+
+  get meetupEvents(): MeetupEvent[] {
+    return this.$store.state.events;
   }
 
   get test(): string {
@@ -44,7 +47,11 @@ export default class Home extends Vue {
     <h2>{{ value }}</h2>
     <h2>{{ counter }}</h2>
     <ul>
-      <event v-for="event in meetupEvents" :key="event.id" :event="event"></event>
+      <event
+        v-for="event in meetupEvents"
+        :key="event.id"
+        :event="event"
+      ></event>
     </ul>
   </div>
 </template>

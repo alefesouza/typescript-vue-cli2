@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       name: 'details',
-      path: '/:id',
+      path: '/events/:id',
       component: Details,
     },
   ],
