@@ -1,7 +1,36 @@
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component
+export default class HelloWorld extends Vue {
+  msg: string = 'Welcome to Your Vue.js App';
+  counter: number = 0;
+
+  @Prop({ default: 'default value' })
+  value: string;
+
+  mounted() {
+    console.log('mounted');
+    setInterval(() => {
+      this.counter++;
+    }, 1000);
+  }
+
+  get test(): string {
+    let itsNumber: number | string = 2;
+    itsNumber = 'llala';
+
+    return itsNumber;
+  }
+}
+</script>
+
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h2>{{ test }}</h2>
+    <h2>{{ value }}</h2>
+    <h2>{{ counter }}</h2>
     <ul>
       <li>
         <a
@@ -83,20 +112,10 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
-</script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

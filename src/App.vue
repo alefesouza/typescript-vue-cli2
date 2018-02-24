@@ -1,20 +1,22 @@
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+import HelloWorld from './components/HelloWorld.vue';
+
+@Component({
+  components: {
+    HelloWorld,
+  },
+})
+export default class App extends Vue {}
+</script>
+
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld/>
+    <HelloWorld value="The value with decorator" />
   </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
 <style>
 #app {
