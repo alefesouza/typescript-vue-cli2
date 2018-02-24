@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import axios from 'axios';
+import { State } from 'vuex-class';
 
 import Event from '../components/Event.vue';
 
@@ -15,21 +15,13 @@ export default class Home extends Vue {
   @Prop({ default: 'default value' })
   value: string;
 
-  readonly URL = 'https://api.meetup.com/VueJS-SP/events/?status=past';
+  @State('events') meetupEvents: MeetupEvent[];
 
   async mounted() {
     console.log('mounted');
     setInterval(() => {
       this.counter++;
     }, 1000);
-
-    const response = await axios.get<MeetupEvent[]>(this.URL);
-
-    this.$store.dispatch('setEvents', response.data);
-  }
-
-  get meetupEvents(): MeetupEvent[] {
-    return this.$store.state.events;
   }
 
   get test(): string {

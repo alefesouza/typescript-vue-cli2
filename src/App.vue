@@ -1,8 +1,20 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
+import axios from 'axios';
 
 @Component
-export default class App extends Vue {}
+export default class App extends Vue {
+  @Action('setEvents') setEvents;
+
+  readonly URL = 'https://api.meetup.com/VueJS-SP/events/?status=past';
+
+  async mounted() {
+    const response = await axios.get<MeetupEvent[]>(this.URL);
+
+    this.setEvents(response.data);
+  }
+}
 </script>
 
 <template>
